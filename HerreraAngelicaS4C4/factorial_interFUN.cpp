@@ -2,21 +2,23 @@
 using namespace std;
 
 //Declaración de funciones
-int factorial(int n);
+double factorial(double n);
 
+//Método constructor
 int main ()
 {
-    int n;
+    double n;
     
-    cout<<"Introduce un número";
+    cout<<"Introduce un número: ";
     cin>>n;
     
-    cout << factorial(n);
+    cout << "Su factorial es: " <<factorial(n) <<endl;
     
     return 0;
 }
 
-int factorial(int n)  
+//Función que calcula el factorial de un numero
+double factorial(double n)  
 {   
     for(int i=n-1; i>0; i--)
     {

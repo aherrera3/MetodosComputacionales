@@ -5,10 +5,10 @@ int main ()
 {
     int a, b, start, stop, contador;
     
-    cout<<"Introduce el primer número";
+    cout<<"Introduce el primer número entero :";
     cin>>a;
     
-    cout<<"Introduce el segundo número";
+    cout<<"Introduce el segundo número entero :";
     cin>>b;
     
     if(a<b)
@@ -22,6 +22,8 @@ int main ()
         start = b;
         stop = a;
     }
+    
+    cout << "Los números primos entre " << start << " y " << stop << " son: " << endl;
     
     for(int i=start ; i<=stop ; i++)
     {

@@ -7,7 +7,7 @@ int main ()
     float b = 3.0;
     float resultado = a*b; 
         
-    cout << resultado << endl;
+    cout << "El producto de a por b es: " << resultado << endl;
     
     return 0;
 }

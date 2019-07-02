@@ -3,9 +3,9 @@ using namespace std;
 
 int main ()
 {
-    int n;
+    double n;
     
-    cout<<"Introduce un número";
+    cout<<"Introduce un número ";
     cin>>n;
     
     for(int i=n-1; i>0; i--)
@@ -13,8 +13,7 @@ int main ()
         n = n*i;   
     }
     
-    cout << n;
-    
+    cout << "Su factorial es: " << n << endl;    
     
     return 0;
 }
