@@ -3,14 +3,14 @@ using namespace std;
 
 int main()
 {
-    int n = 7;
+    double n = 77;
     
     for(int i=n-1; i>0; i--)
     {
         n = n*i;   
     }
     
-    cout << n;
+    cout << "El factorial de n=77 es: " << n << endl;
     
     return 0;
 }
