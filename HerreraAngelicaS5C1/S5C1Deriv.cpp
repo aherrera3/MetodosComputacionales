@@ -4,15 +4,14 @@ using namespace std;
 
 //Declaracion de variables
 int *apuntador;  //declaracion del apuntador
+double a, b, start, stop, dx;
+int n;
 
 //Declaracion de mi funcion
 int derivada(double);
 
 int main()
-{
-    double a, b, start, stop, dx;
-    int n;
-    
+{   
     cout<<"Introduce el primer número entero: ";
     cin>>a;
     
@@ -61,11 +60,11 @@ int main()
     return 0;
 }
 
-int derivada(double f)
+int * derivada(double f)
 {
-    for(int i =1 ; i<n ; i++)
+    for(int i = 2 ; i<=n ; i++)
     {
-        (f[i]-f[0])/
+        der[i] = (f[i]-f[i-2])/(2*dx)
     }
     
     
