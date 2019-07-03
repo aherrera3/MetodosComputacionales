@@ -15,8 +15,12 @@ int prod;
 
 int main ()
 {   
-    producto(arr1,arr2);
-    //cout << "El producto entre arr1 por arr2 es: "  << producto(arr1,arr2) << endl;
+    cout << "El producto entre arr1 por arr2 es: [";
+        
+    for(int i = 0; i<4 ; i++) cout << producto(arr1,arr2)[i] << ", ";
+    
+    cout << producto(arr1,arr2)[4] << "]" << endl;
+    
     cout << "El producto  punto entre arr1 por arr2 es: " << producto_punto(arr1,arr2) << endl;
            
     return 0;
@@ -24,26 +28,18 @@ int main ()
 
 int * producto (int arr1[5], int arr2[5])
 {       
-    for(int i = 0; i<5 ; i++)
-    {
-        arr[i] = arr1[i] * arr2[i]; 
-    }
+    for(int i = 0; i<5 ; i++) arr[i] = arr1[i] * arr2[i]; 
     
     apuntador = arr;
-    
-    cout << "El producto entre arr1 por arr2 es: " << *apuntador << endl;
+    return apuntador;
 }
 
 int producto_punto(int arr1[5], int arr2[5])
 {       
     prod = 0;
     
-    for(int i = 0; i<5 ; i++)
-    {
-        prod = prod + arr1[i] * arr2[i];   
-    }
+    for(int i = 0; i<5 ; i++) prod = prod + arr1[i] * arr2[i];   
     
     return prod;
 }
-
 
