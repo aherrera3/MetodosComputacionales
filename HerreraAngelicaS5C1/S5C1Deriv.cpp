@@ -35,7 +35,7 @@ int main()
         stop = a;
     }
     
-    dx = (stop-start)/(n-1);    
+    dx = (stop-start)/(n-1);
     x[0] = start;
     cout << "mi arreglo x es: [" << x[0] << ", ";
    
