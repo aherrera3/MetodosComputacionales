@@ -55,9 +55,12 @@ int main()
     p_x = x;
     p_coseno = coseno;
     
+    cout << "Mi arreglo de derivadas es: " <<endl;
+    
     for(int i = 0; i<n-1 ;i++)
     {
         archivo << x[i] << " " << coseno[i] << " " << derivada(p_x, p_coseno)[i] << endl;  
+        cout << derivada(p_x, p_coseno)[i] << " ";
     }
     
     archivo.close();
