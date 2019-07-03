@@ -1,3 +1,6 @@
+all : plotsS5C1.py
+	python plotsS5C1.py
+
 plotsS5C1.py : datos.dat
 	python plotsS5C1.py
 
