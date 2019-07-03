@@ -44,24 +44,12 @@ int main()
     dx = (stop-start)/(n-1);
     x[0] = start;
     coseno[0] = cos(x[0]);   //toma a los x como radianes
-      
     
-    //cout << "mi arreglo x es: [" << x[0] << ", ";
-    cout << "mi coseno(x) es: [" << coseno[0] << ", ";    
    
     for(int i = 1; i<n ; i++)
     {
         x[i] = x[i-1] + dx;
         coseno[i] = cos(x[i]);
-        
-        if(i == n-1) {
-           // cout << x[i] << "]" << endl;
-            cout << coseno[i] << "]" << endl;
-        }        
-        else {
-           // cout << x[i] << ", ";
-            cout << coseno[i] << ", ";
-        }
     }  
     
     //inicializo mis pointers de los arreglos x y coseno
