@@ -9,16 +9,19 @@ int derivada();
 
 int main()
 {
-    int a, b, start, stop, n, arr[5];
+    double a, b, start, stop, dx;
+    int n;
     
-    cout<<"Introduce el primer número entero :";
+    cout<<"Introduce el primer número entero: ";
     cin>>a;
     
-    cout<<"Introduce el segundo número entero :";
+    cout<<"Introduce el segundo número entero: ";
     cin>>b;
     
-    cout << "Introduce el número de puntos del intervalo:";
+    cout << "Introduce el número de puntos del intervalo: "; //cuento como puntos a mis dos extremos
     cin >> n;
+    
+    double x[n];
     
     if(a<b)
     {
@@ -32,16 +35,19 @@ int main()
         stop = a;
     }
     
-    arr[0] = start;
-    arr[-1] = stop;     
-    
-    /*
-    for(int i = 1; i<"algo" ; i++)
+    dx = (stop-start)/(n-1);    
+    x[0] = start;
+    cout << "mi arreglo x es: [" << x[0] << ", ";
+   
+    for(int i = 1; i<n ; i++)
     {
-        start = start + n;
-        arr[i] = start;
+        x[i] = x[i-1] + dx;
+        
+        if(i == n-1) cout << x[i] << "]" << endl;
+        
+        else cout << x[i] << ", ";
     }    
-    */
+    
     return 0;
 }
 
