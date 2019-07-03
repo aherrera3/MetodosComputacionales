@@ -43,8 +43,7 @@ int main()
     
     dx = (stop-start)/(n-1);
     x[0] = start;
-    coseno[0] = cos(x[0]);   //toma a los x como radianes
-    
+    coseno[0] = cos(x[0]);   //toma a los x como radianes    
    
     for(int i = 1; i<n ; i++)
     {
