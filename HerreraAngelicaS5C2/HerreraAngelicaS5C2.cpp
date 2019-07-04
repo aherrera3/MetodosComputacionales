@@ -11,6 +11,7 @@ int n;
 double derivada(double);
 void euler();
 void runge_kutta();
+void leap_frog();
 
 int main()
 {
@@ -24,7 +25,8 @@ int main()
     y[0] = 1;
         
     //euler();
-    runge_kutta();
+    //runge_kutta();
+    leap_frog();
     
     return 0;
 }
@@ -62,6 +64,22 @@ void runge_kutta()
         
         cout << x[i] << " " << y[i] << endl;
     }    
+}
+
+
+void leap_frog()
+{
+    x[1] = x[0] + dx;
+    y[1] = y[0] + dx*derivada(y[0]);
+ 
+    for(int i=2; i<=n; i++)
+    {
+        x[i] = x[i-1] + dx;
+        y[i] = y[i-2] + 2*dx*derivada(y[i-1]);
+        
+        cout << x[i] << " " << y[i] << endl;
+    }
+    
 }
 
 
