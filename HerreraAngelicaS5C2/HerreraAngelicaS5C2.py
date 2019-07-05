@@ -1,16 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-datos = np.genfromtxt("datos.dat")
+datos_euler = np.genfromtxt("datos_euler.dat")
+datos_runge = np.genfromtxt("datos_runge.dat")
 
-x = datos[:,0]
-y = datos[:,1]
+x = datos_euler[:,0]
+euler = datos_euler[:,1]
+
+x1 = datos_runge[:,0]
+runge = datos_runge[:,1]
 
 plt.figure()
-plt.plot(x, y, label="solucion y")
+plt.plot(x, euler, label="por euler")
+plt.plot(x1, runge, label="por runge-kutta")
 plt.xlabel("x")
 plt.ylabel("y (x)")
 plt.legend()
-plt.title("solucion y")
+plt.title("Solucion y a la EDO y'=-y ")
 plt.grid()
 plt.savefig("S5C2PLOT")
