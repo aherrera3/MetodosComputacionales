@@ -1,10 +1,11 @@
 //ec dif: y'= -y
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 //variables globales
-double x[100], y[100], dx, start, stop, k1, k2, k3, k4, slope;
+double x[100], y[100], y1[100], dx, start, stop, k1, k2, k3, k4, slope;
 int n;
 
 //declaracion de funciones
@@ -23,10 +24,11 @@ int main()
     //condiciones iniciales
     x[0] = start;
     y[0] = 1;
+    y1[0] = 1;
         
-    //euler();
-    //runge_kutta();
-    leap_frog();
+    euler();
+    runge_kutta();
+    //leap_frog();
     
     return 0;
 }
@@ -38,19 +40,27 @@ double derivada(double y)
 
 void euler()
 {
-    for(int i=1; i<=n ;i++)
+    //abro y creo un archivo llamado datos.dat
+    ofstream archivo;
+    archivo.open("datos_euler.dat");
+    
+    for(int i=1; i<n ;i++)
     {
         x[i] = x[i-1] + dx;
-        y[i] = y[i-1] + dx*derivada(y[i-1]);     
+        y1[i] = y1[i-1] + dx*derivada(y1[i-1]);     
         
-        cout << x[i] << " " << y[i] << endl;
+        archivo << x[i] << " " << y1[i] << endl;
     }        
+    archivo.close();
 }
 
 //Runge-kutta de 4 orden
 void runge_kutta()
 {
-    for(int i=1 ; i<=n; i++)
+    ofstream archivo;
+    archivo.open("datos_runge.dat");
+  
+    for(int i=1 ; i<n; i++)
     {
         k1 = dx*derivada(y[i-1]);
         k2 = dx*derivada(y[i-1] + 0.5*k1);
@@ -62,11 +72,12 @@ void runge_kutta()
         x[i] = x[i-1] + dx;
         y[i] = y[i-1] + slope;
         
-        cout << x[i] << " " << y[i] << endl;
+         archivo << x[i] << " " << y[i] << endl;
     }    
+    archivo.close();
 }
 
-
+/*
 void leap_frog()
 {
     x[1] = x[0] + dx;
@@ -81,6 +92,5 @@ void leap_frog()
     }
     
 }
-
-
+*/
 
