@@ -6,4 +6,4 @@ HerreraAngelicaS5C2.py : datos.dat
 
 datos.dat : HerreraAngelicaS5C2.cpp
 	g++ HerreraAngelicaS5C2.cpp
-	./a.out HerreraAngelicaS5C2.cpp > datos.dat
+	./a.out HerreraAngelicaS5C2.cpp
