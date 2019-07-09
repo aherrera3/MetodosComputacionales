@@ -57,7 +57,7 @@ int main()
     
     //construyo mi funcion u en mis siguientes tiempos
     cout << "mi dt es : " << dt << endl; 
-    archivo << x[0] << " " << u[0] << " " << u_futuro[0] << endl;
+    cout << x[0] << " " << u[0] << " " << u_futuro[0] << endl;
    
     int a = 1;
     while(t[a]<=0.1)
@@ -74,8 +74,14 @@ int main()
         }
             
         t[a] = t[a-1] + dt;
+        a++;
     }     
-            
+         
+    for(int i=1; i<=n; i++)
+    {
+        cout << x[i] << " " << u[i] << " " << u_futuro[i]  << endl;
+    }
+    
     archivo.close();
     return 0;    
 }
