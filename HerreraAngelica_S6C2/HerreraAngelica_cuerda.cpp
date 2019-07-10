@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    double dt, dx, c, r, l, A0, u[2000], x[2000], t[2000], u_pasado[2000], u_futuro[2000], u_presente[2000];
+    double dt, dx, c, r, l, A0, u[2000], x[2000], t[100000], u_pasado[2000], u_futuro[2000], u_presente[2000];
     double u_pre[2000], u_pas[2000], u_fut[2000];  //para caso 2
     double u_caso3[2000], u_pre_caso3[2000], u_pas_caso3[2000], u_fut_caso3[2000]; //para caso 3
     double t1[2000], t2[2000], t3[2000], t4[2000], t1_[2000], t2_[2000], t3_[2000], t4_[2000], _t1_[2000], _t2_[2000], _t3_[2000], _t4_[2000];
@@ -72,13 +72,13 @@ int main()
         u_pre[n-1] = u_pre[n-2];
         
         u_pre_caso3[i] = (r*r/2.0) *(u_pas_caso3[i+1] -2.0*u_pas_caso3[i] + u_pas_caso3[i-1]) + u_pas_caso3[i];
-        u_pre_caso3[i-1] = A0*cos(3.0*c*t[1]*M_PI/l);
+        if(i==n-1) u_pre_caso3[i] = A0*sin(3.0*c*t[0]*M_PI/l);
     }
     
     //construyo mi funcion u en mis siguientes tiempos
     cout << "mi dt es : " << dt << endl; 
    
-    for(int a=1; a<=1000; a++)
+    for(int a=1; a<100000; a++)
     {
         //if(t[a] >= 0.1) break;
         t[a] = t[a-1] + dt;
@@ -90,7 +90,7 @@ int main()
             u_fut[n-1] = u_fut[n-2];
             
             u_fut_caso3[i] = r*r *(u_pre_caso3[i+1] -2.0*u_pre_caso3[i] + u_pre_caso3[i-1]) + 2.0*u_pre_caso3[i] - u_pas_caso3[i];
-            u_fut_caso3[i-1] = A0*cos(3.0*c*t[a]*M_PI/l);   
+            if(i==n-1) u_fut_caso3[i] = A0*sin(3.0*c*t[a]*M_PI/l);   
         }
       
         //construyo mis nuevos pasados y presentes
@@ -115,10 +115,10 @@ int main()
             u_pas_caso3[j] = u_pre_caso3[j];
             u_pre_caso3[j] = u_fut_caso3[j];
             
-            if(a==200) _t1_[j] = u_pre_caso3[j];
-            if(a==400) _t2_[j] = u_pre_caso3[j];
-            if(a==600) _t3_[j] = u_pre_caso3[j];
-            if(a==800) _t4_[j] = u_pre_caso3[j]; 
+            if(a==500) _t1_[j] = u_pre_caso3[j];
+            if(a==4000) _t2_[j] = u_pre_caso3[j];
+            if(a==8000) _t3_[j] = u_pre_caso3[j];
+            if(a==9000) _t4_[j] = u_pre_caso3[j]; 
         }
     }
         
