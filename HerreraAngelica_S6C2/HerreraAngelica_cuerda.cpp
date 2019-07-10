@@ -4,10 +4,8 @@ using namespace std;
 
 int main()
 {
-    ofstream archivo;
-    archivo.open("datos.dat");
-    
     double dt, dx, c, r, l, A0, u[2000], x[2000], t[2000], u_pasado[2000], u_futuro[2000], u_presente[2000]; 
+    double t1[2000], t2[2000], t3[2000], t4[2000];
     int n;
     
     l = 1.0;
@@ -53,36 +51,49 @@ int main()
     for(int i=1; i<n; i++)
     {
         u_presente[i] = (r*r/2.0) *(u_pasado[i+1] -2.0*u_pasado[i] + u_pasado[i-1]) + u_pasado[i];
-        //archivo << x[i] << " " << u[i] << " " << u_presente[i]  << endl;
     }
     
     //construyo mi funcion u en mis siguientes tiempos
     cout << "mi dt es : " << dt << endl; 
    
-    for(int j=1; t[j]<=0.1; j++)
+    for(int a=1; a<=1000; a++)
     {
+        //if(t[a] >= 0.1) break;
+            
         for(int i=1; i<n; i++)
         {
             u_futuro[i] = r*r *(u_presente[i+1] -2.0*u_presente[i] + u_presente[i-1]) + 2.0*u_presente[i] - u_pasado[i];
-            //cout << u_futuro[3] << endl;
         }
+      
         //construyo mis nuevos pasados y presentes
+        for(int j=1; j<n; j++) 
+        {
+            u_pasado[j] = u_presente[j];
+            u_presente[j] = u_futuro[j];
+            
+            if(a==200) t1[j] = u_presente[j];
+            if(a==400) t2[j] = u_presente[j];
+            if(a==600) t3[j] = u_presente[j];
+            if(a==800) t4[j] = u_presente[j];            
+        }
         
-        u_pasado[j] = u_presente[j];
-        u_presente[j] = u_futuro[j];
-           
-        t[j] = t[j-1] + dt;
+        t[a] = t[a-1] + dt;
     }
-         
+        
+    //paso datos de extremos fijos
+    ofstream archivo;
+    archivo.open("datos.dat");
+    
     for(int i=0; i<n; i++)
     {
-        archivo << x[i] << " " << u[i] << " " << u_presente[i]  << endl;
+        archivo << x[i] << " " << u[i] << " " << t1[i] << " " << t2[i] << " " << t3[i] << " " << t4[i] << endl;
     }
-    
     archivo.close();
+    
+    
+    //UN EXTREMO LIBRE
+    
+    
     return 0;    
 }
     
-
-
-
