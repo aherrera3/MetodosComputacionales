@@ -54,10 +54,14 @@ int main()
         u_caso3[i] = 0.0; 
         u_pas_caso3[i] = u_caso3[i];
         
+        for(int i=1; i<n;i++)
+        {
+            x[i] = x[i-1] + dx;
+        }
+        
         for(int j=1; j<n; j++)
         {
-            x[j] = x[j-1] + dx;
-            f[i][j] = A0*exp(-(x[i]-l/2)*(x[i]-l/2)/(2*sigma*sigma));   //gaussiana centrada en x=0;
+            f[i][j] = A0*exp(-(x[j]-l/2)*(x[j]-l/2)/(2*sigma*sigma));   //gaussiana centrada en x=0;
         }
         
         if(x[i] <= l/2) 
@@ -151,7 +155,10 @@ int main()
         archivo << x[i] << " " << u[i] << " " << t1[i] << " " << t2[i] << " " << t3[i] << " " << t4[i] << endl;
         archivo1 << x[i] << " " << u[i] << " " << t1_[i] << " " << t2_[i] << " " << t3_[i] << " " << t4_[i] << endl;
         archivo2 << x[i] << " " << u_caso3[i] << " " << _t1_[i] << " " << _t2_[i] << " " << _t3_[i] << " " << _t4_[i] << endl;
-        archivo3 << x[i] << " " << f[i][j] << endl;
+        for(int j=0; j<n; j++)
+        {
+            archivo3 << x[i] << " " << f[j][i] << endl;
+        }
     }
     archivo.close();
     archivo1.close();
