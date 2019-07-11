@@ -3,11 +3,11 @@
 #include <math.h>
 using namespace std;
 
-#define M_PI 3.14159265358979323846 /* pi */
+#define M_PI 3.14159265358979323846
 
 int main()
 {
-    double dt, dx, c, r, l, A0, u[2000], x[2000], t[100000], u_pasado[2000], u_futuro[2000], u_presente[2000];
+    double dt, dx, c, r, l, A0, u[2000], x[2000], t[10000], u_pasado[2000], u_futuro[2000], u_presente[2000];
     double u_pre[2000], u_pas[2000], u_fut[2000];  //para caso 2
     double u_caso3[2000], u_pre_caso3[2000], u_pas_caso3[2000], u_fut_caso3[2000]; //para caso 3
     double t1[2000], t2[2000], t3[2000], t4[2000], t1_[2000], t2_[2000], t3_[2000], t4_[2000], _t1_[2000], _t2_[2000], _t3_[2000], _t4_[2000];
@@ -39,7 +39,6 @@ int main()
     u_caso3[0] = 0.0;
     u_pas_caso3[0] = 0.0;
     u_fut_caso3[0] = 0.0;
-    t[1] = t[0] + dt;
     
     //defino mi cuerda en t=0, el cual sera mi primer pasado, y lleno mi arreglo x.
     for(int i=1; i<n; i++)
@@ -78,7 +77,7 @@ int main()
     //construyo mi funcion u en mis siguientes tiempos
     cout << "mi dt es : " << dt << endl; 
    
-    for(int a=1; a<100000; a++)
+    for(int a=1; a<10000; a++)
     {
         //if(t[a] >= 0.1) break;
         t[a] = t[a-1] + dt;
@@ -117,7 +116,7 @@ int main()
             
             if(a==500) _t1_[j] = u_pre_caso3[j];
             if(a==4000) _t2_[j] = u_pre_caso3[j];
-            if(a==8000) _t3_[j] = u_pre_caso3[j];
+            if(a==7000) _t3_[j] = u_pre_caso3[j];
             if(a==9000) _t4_[j] = u_pre_caso3[j]; 
         }
     }
