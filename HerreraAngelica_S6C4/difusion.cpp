@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     double l, nu, dx, dt, r, x[100], y[100];
-    double T[100][100];
+    double T[100][100], T_presente[100][100], T_futuro[100][100];
     int n;
     
     l = 1.0;
@@ -40,19 +40,32 @@ int main()
             if(y[i]>=l/2.0-0.2 && y[i]<=l/2.0+ 0.2 && x[j]>=0.2 && x[j]<=0.4)   //si esta dentro de mis valores de x y y correctos
             {
                 T[i][j] = 100.0;
+                T_presente[i][j] =  T[i][j];
             }
             
-            else T[i][j] = 50.0;
+            else 
+            {
+                T[i][j] = 50.0;
+                T_presente[i][j] =  T[i][j];
+            }
             
             matriz << T[i][j] << " ";
         }
         matriz << endl;
-        
         datos << x[i] << " " << y[i] << endl;
     }
     
     datos.close();
     matriz.close();
+    
+    
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n ; j++)
+        {
+            T_futuro[i][j] = r*(T_presente[i+1][j] - 2*T_presente[i][j] + T_presente[i-1][j] + T_presente[i][j+1] - 2*T_presente[i][j] + T_presente[i][j-1]) + T_presente[i][j];
+        }
+    }
     
     return 0;
 }
