@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pylab as plt
-from scipy.fftpack import fft, fftfreq, fft2, ifft2
+from scipy.fftpack import fft2, ifft2, fftshift
 
 #Almaceno los datos las dos imágenes
 im1 = plt.imread("cara_03_grisesMF.png")   #imagen feliz
@@ -31,8 +31,9 @@ plt.savefig("FFT2D_im2.png")
 #Filtros y sus graficas
 #filtro paso alto para imagen de cerca
 fc_1 = 0.1
-ind_im1 = np.where(fourier_im1 < fc_1)
-fourier_im1[ind_im1] = 0
+freq_im1 = fftshift(fourier_im1)
+ind_im1 = np.where(freq_im1 < fc_1)   #indices de mis frecuencias malas
+freq_im1[ind_im1] = 0   #mando a 0 las frecuencias malas
 
 plt.figure()
 plt.imshow(abs(fourier_im1), norm=LogNorm())
@@ -41,8 +42,9 @@ plt.savefig("filtro_im1")
 
 #filtro paso bajo para imagen de lejos
 fc_2 = 100
-ind_im2 = np.where(fourier_im2 > fc_2)
-fourier_im2[ind_im2] = 0
+freq_im2 = fftshift(fourier_im2)
+ind_im2 = np.where(freq_im2 > fc_2)
+freq_im2[ind_im2] = 0
 
 plt.figure()
 plt.imshow(abs(fourier_im2), norm=LogNorm())
@@ -63,9 +65,10 @@ plt.title('im2 filtrada')
 plt.savefig("im2_filtrada")
 
 #Grafica de ambas juntas (imagen hibrida)
+
+im_hibrida = np.real(im1_fil) + np.real(im2_fil)
 plt.figure()
-plt.imshow(np.real(im1_fil), plt.cm.gray)
-plt.imshow(np.real(im2_fil), plt.cm.gray)
+plt.imshow(im_hibrida, plt.cm.gray)
 plt.title('imagen hibrida')
 plt.savefig("im_hibrida")
 
