@@ -7,8 +7,8 @@ using namespace std;
 
 //variables globales
 double G, m, dt, r[10000], t[10000], x[10000], y[10000], vx[10000], vy[10000]; 
-double  r_[10000], x_[10000], y_[10000], vx_[10000], vy_[10000];
-double  _r_[10000], _x_[10000], _y_[10000], _vx_[10000], _vy_[10000]; 
+double  r_[10000], x_[10000], y_[10000], vx_[10000], vy_[10000];   //leap-frog
+double  _r_[10000], _x_[10000], _y_[10000], _vx_[10000], _vy_[10000];    //runge-kutta
 int n;
 
 //Declaracion de las funciones
@@ -27,14 +27,11 @@ int main()
     archivo1.open("leap_frog.dat");
     
     G = 1.98256*pow(10,-29);    //6.674*pow(10,-11);   //constante gravitacional  [N m^2/kg^2]
-    m = 1.989*pow(10,30); 
+    m = 1.989*pow(10,30);
     
     n = 1000;
-    t[0] = 0.0;
-    t[n-1] = 20.0;   //20 orbitas = 20 años
-        
-    dt = (t[n-1]-t[0])/(n-1);
-    cout << "mi dt es: " << dt;  
+    //n1 = 10000;
+   //n2 = 50000;
     
     //c.i
     x[0] = 0.1163;  //para euler
@@ -53,16 +50,18 @@ int main()
     _vy_[0] = vy[0];
     
     r[0] = sqrt(pow(x[0],2) + pow(y[0],2));          //para euler
-    r_[0] = r[0];        //para leap-frog  
-    _r_[0] = r[0];       //para runge-kutta
+    r_[0] = r[0];                                   //para leap-frog  
+    _r_[0] = r[0];                                 //para runge-kutta
     
+    cout << "mi r es :" << r[0] << endl;
+     
     archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
     archivo1 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
     
     for(int i=1; i<n; i++)
     {
         t[i] = t[i-1] + dt; 
-            
+        
         //euler
         vx[i] = vx[i-1] + dt*aceleracion(x[i-1], r[i-1]);
         vy[i] = vy[i-1] + dt*aceleracion(y[i-1], r[i-1]);
@@ -70,7 +69,18 @@ int main()
         y[i] = euler(y[i-1], vy[i-1]);
         
         r[i] = sqrt(pow(x[i],2) + pow(y[i],2));
-        
+        /*
+        if(i<=n-1)    //si tengo n=1000 puntos
+        {
+            double t[1000];
+            t[0] = 0.0;
+            t[n-1] = 20.0;   //20 orbitas = 20 años
+            dt = (t[n-1]-t[0])/(n-1);
+            
+            archivo << t[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << endl;
+            
+        }
+        */
         //leap-frog
         if(i==1)
         {
