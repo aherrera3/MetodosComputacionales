@@ -6,9 +6,9 @@
 using namespace std; 
 
 //variables globales
-double G, m, dt, r[1000], t[1000], x[1000], y[1000], vx[1000], vy[1000]; 
-double  r_[1000], x_[1000], y_[1000], vx_[1000], vy_[1000];
-double  _r_[1000], _x_[1000], _y_[1000], _vx_[1000], _vy_[1000]; 
+double G, m, dt, r[10000], t[10000], x[10000], y[10000], vx[10000], vy[10000]; 
+double  r_[10000], x_[10000], y_[10000], vx_[10000], vy_[10000];
+double  _r_[10000], _x_[10000], _y_[10000], _vx_[10000], _vy_[10000]; 
 int n;
 
 //Declaracion de las funciones
@@ -31,7 +31,7 @@ int main()
     
     n = 1000;
     t[0] = 0.0;
-    t[n-1] = 1.0;   //20 orbitas = 20 años
+    t[n-1] = 20.0;   //20 orbitas = 20 años
         
     dt = (t[n-1]-t[0])/(n-1);
     cout << "mi dt es: " << dt;  
@@ -56,16 +56,19 @@ int main()
     r_[0] = r[0];        //para leap-frog  
     _r_[0] = r[0];       //para runge-kutta
     
-    archivo << x[0] << " " << y[0] << endl;
-    archivo1 << x_[0] << " " << y_[0] << endl;
+    archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
+    archivo1 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
     
     for(int i=1; i<n; i++)
     {
+        t[i] = t[i-1] + dt; 
+            
         //euler
         vx[i] = vx[i-1] + dt*aceleracion(x[i-1], r[i-1]);
         vy[i] = vy[i-1] + dt*aceleracion(y[i-1], r[i-1]);
         x[i] = euler(x[i-1], vx[i-1]);
         y[i] = euler(y[i-1], vy[i-1]);
+        
         r[i] = sqrt(pow(x[i],2) + pow(y[i],2));
         
         //leap-frog
@@ -88,8 +91,8 @@ int main()
         r_[i] = sqrt(pow(x_[i],2) + pow(y_[i],2));
         
         
-        archivo << x[i] << " " << y[i] << endl;
-        archivo1 << x_[i] << " " << y_[i] << endl;
+        archivo << t[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << endl;
+        archivo1 << t[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << endl;
     }
     
     archivo.close();
@@ -121,13 +124,13 @@ double runge_kutta()
     ofstream archivo2;
     archivo2.open("runge_kutta.dat");
     
-    archivo2 << _x_[0] << " " << _y_[0] << endl;
+    archivo2 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << endl;
     
     for(int i=1; i<n; i++)
     {
-        double k1_1_x = _x_[i-1];
+        double k1_1_x = _vx_[i-1];
         double k1_2_x = aceleracion(_x_[i-1], _r_[i-1]);
-        double k1_1_y = _y_[i-1];
+        double k1_1_y = _vy_[i-1];
         double k1_2_y = aceleracion(_y_[i-1], _r_[i-1]);
     
         double pos1_x = _x_[i-1] + (dt/2) * k1_1_x;
@@ -172,8 +175,7 @@ double runge_kutta()
         
         _r_[i] = sqrt(pow(_x_[i],2) + pow(_y_[i],2));
         
-        archivo2 << _x_[i] << " " << _y_[i] << endl;
-        
+        archivo2 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i]  << endl;
     }
     
     archivo2.close();
