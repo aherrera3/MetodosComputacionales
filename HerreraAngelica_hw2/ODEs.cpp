@@ -19,7 +19,7 @@ double aceleracion(double, double);
 
 int main()
 {
-    //creo archivos para dt=0.02
+    //creo archivos para euler y lep-frog
     ofstream archivo;
     archivo.open("euler_dt1.dat");
     ofstream archivo1;
@@ -41,11 +41,6 @@ int main()
     n1 = 10000;
     n2 = 100000;
     
-    //t[0] = 0.0;
-    //t[n-1] = 20.0;   //20 orbitas = 20 años
-    //dt = (t[n-1]-t[0])/(n-1);
-    //cout << "mi dt es" << dt << endl;
-    
     //c.i
     x[0] = 0.1163;  //para euler
     y[0] = 0.9772;
@@ -66,14 +61,17 @@ int main()
     r_[0] = r[0];                                   //para leap-frog  
     _r_[0] = r[0];                                 //para runge-kutta
     
-     
+    //paso condiciones iniciales a archivos 
     archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
     archivo_dt2 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
+    archivo_dt3 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
+    
     archivo1 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
     archivo1_dt2 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
+    archivo1_dt3 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
     
     
-    //primer dt=0.02
+    //para n=1000 (dt=0.02)
     t[0] = 0.0;
     t[n-1] = 20.0;          //20 orbitas = 20 años
     dt = (t[n-1]-t[0])/(n-1); 
@@ -118,7 +116,7 @@ int main()
     archivo1.close();
     
     
-    //para n=10000
+    //para n=10000 (dt=0.002)
     t_[0] = 0.0;
     t_[n1-1] = 20.0;          //20 orbitas = 20 años
     dt = (t_[n1-1]-t_[0])/(n1-1); 
@@ -162,7 +160,7 @@ int main()
     archivo1_dt2.close();
     
     
-    //para n=100000
+    //para n=100000 (dt=0.0002)
     _t_[0] = 0.0;
     _t_[n2-1] = 20.0;          //20 orbitas = 20 años
     dt = (_t_[n2-1]-_t_[0])/(n2-1); 
@@ -206,7 +204,7 @@ int main()
     archivo1_dt3.close();
     
     //para los 3 dt
-    //runge_kutta();
+    runge_kutta();
     
     return 0;    
 }
@@ -226,7 +224,7 @@ double leap_frog(double pos_antes_antes, double v_antes)
     return pos_antes_antes + 2*dt*v_antes;
 }
 
-double runge_kutta(double dt)
+double runge_kutta()
 {
     ofstream archivo2;
     archivo2.open("runge_kutta_dt1.dat");
@@ -240,6 +238,10 @@ double runge_kutta(double dt)
     archivo2_dt3 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << endl;
     
     //para n=1000
+    t[0] = 0.0;
+    t[n-1] = 20.0;          //20 orbitas = 20 años
+    dt = (t[n-1]-t[0])/(n-1); 
+    
     for(int i=1; i<n; i++)
     {
         double k1_1_x = _vx_[i-1];
@@ -295,6 +297,10 @@ double runge_kutta(double dt)
     
     
     //para n=10000
+    t_[0] = 0.0;
+    t_[n1-1] = 20.0;          //20 orbitas = 20 años
+    dt = (t_[n1-1]-t_[0])/(n1-1); 
+    
     for(int i=1; i<n1; i++)
     {
         double k1_1_x = _vx_[i-1];
@@ -350,6 +356,10 @@ double runge_kutta(double dt)
     
     
     //para n=100000
+    _t_[0] = 0.0;
+    _t_[n2-1] = 20.0;          //20 orbitas = 20 años
+    dt = (_t_[n2-1]-_t_[0])/(n2-1); 
+    
     for(int i=1; i<n2; i++)
     {
         double k1_1_x = _vx_[i-1];
@@ -402,5 +412,4 @@ double runge_kutta(double dt)
         archivo2_dt3 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i]  << endl;
     }
     archivo2_dt3.close();
-    
 } 
