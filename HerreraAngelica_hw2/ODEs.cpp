@@ -6,7 +6,7 @@
 using namespace std; 
 
 //variables globales
-double G, m, dt, r[10000], t[10000], x[10000], y[10000], vx[10000], vy[10000]; 
+double G, m_s, m, dt, r[10000], t[10000], x[10000], y[10000], vx[10000], vy[10000]; 
 double  r_[10000], x_[10000], y_[10000], vx_[10000], vy_[10000];   //leap-frog
 double  _r_[10000], _x_[10000], _y_[10000], _vx_[10000], _vy_[10000];    //runge-kutta
 int n;
@@ -26,12 +26,18 @@ int main()
     ofstream archivo1;
     archivo1.open("leap_frog.dat");
     
-    G = 1.98256*pow(10,-29);    //6.674*pow(10,-11);   //constante gravitacional  [N m^2/kg^2]
-    m = 1.989*pow(10,30);
+    m_s = 1.989e30;
+    G = 1.98256e-29*m_s;    //6.674*pow(10,-11);   //constante gravitacional  [N m^2/kg^2]
+    m = 1;
     
-    n = 1000;
+    n = 10000;
     //n1 = 10000;
-   //n2 = 50000;
+   //n2 = 100000;
+    
+    t[0] = 0.0;
+    t[n-1] = 20.0;   //20 orbitas = 20 años
+    dt = (t[n-1]-t[0])/(n-1);
+    cout << "mi dt es" << dt << endl;
     
     //c.i
     x[0] = 0.1163;  //para euler
