@@ -1,4 +1,7 @@
-all : Plots_hw2.py FFT2D_im1.png FFT2D_im2.png filtro_im1.png filtro_im2.png freq_im1.png freq_im2.png im_hibrida.png
+Resultados_hw2.pdf : Resultados_hw2.tex FFT2D_im1.png FFT2D_im2.png filtro_im1.png filtro_im2.png freq_im1.png freq_im2.png im_hibrida.png y_vs_x.png vy_vs_vx.png L_vs_t.png E_vs_t.png
+	pdflatex Resultados_hw2.tex
+
+Resultados_hw2.tex : Plots_hw2.py 
 	python Plots_hw2.py
 	python Fourier.py
 
