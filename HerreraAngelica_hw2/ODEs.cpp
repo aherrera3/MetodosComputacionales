@@ -62,13 +62,13 @@ int main()
     _r_[0] = r[0];                                 //para runge-kutta
     
     //paso condiciones iniciales a archivos 
-    archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
-    archivo_dt2 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
-    archivo_dt3 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << endl;
+    archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << " " << r[0]  << endl;
+    archivo_dt2 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << " " << r[0] << endl;
+    archivo_dt3 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << " " << r[0] << endl;
     
-    archivo1 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
-    archivo1_dt2 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
-    archivo1_dt3 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << endl;
+    archivo1 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << " " << r_[0] << endl;
+    archivo1_dt2 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << " " << r_[0] << endl;
+    archivo1_dt3 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << " " << r_[0] << endl;
     
     
     //para n=1000 (dt=0.02)
@@ -108,8 +108,8 @@ int main()
         
         r_[i] = sqrt(pow(x_[i],2) + pow(y_[i],2));
                 
-        archivo << t[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << endl;
-        archivo1 << t[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << endl;
+        archivo << t[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << " " << r[i] << endl;
+        archivo1 << t[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << " " << r_[i] << endl;
     }
     
     archivo.close();
@@ -153,8 +153,8 @@ int main()
         
         r_[i] = sqrt(pow(x_[i],2) + pow(y_[i],2));
                 
-        archivo_dt2 << t_[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << endl;
-        archivo1_dt2 << t_[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << endl;
+        archivo_dt2 << t_[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << " " << r[i] << endl;
+        archivo1_dt2 << t_[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << " " << r_[i] << endl;
     }
     archivo_dt2.close();
     archivo1_dt2.close();
@@ -197,8 +197,8 @@ int main()
         
         r_[i] = sqrt(pow(x_[i],2) + pow(y_[i],2));
                 
-        archivo_dt3 << _t_[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << endl;
-        archivo1_dt3 << _t_[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << endl;
+        archivo_dt3 << _t_[i] << " " << x[i] << " " << y[i] << " " << vx[i] << " " << vy[i] << " " << r[i] << endl;
+        archivo1_dt3 << _t_[i] << " " << x_[i] << " " << y_[i] << " " << vx_[i] << " " << vy_[i] << " " << r_[i] << endl;
     }
     archivo_dt3.close();
     archivo1_dt3.close();
@@ -233,9 +233,9 @@ double runge_kutta()
     ofstream archivo2_dt3;
     archivo2_dt3.open("runge_kutta_dt3.dat");
     
-    archivo2 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << endl;
-    archivo2_dt2 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << endl;
-    archivo2_dt3 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << endl;
+    archivo2 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << " " << _r_[0] << endl;
+    archivo2_dt2 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << " " << _r_[0] << endl;
+    archivo2_dt3 << t[0] << " " << _x_[0] << " " << _y_[0] << " " << _vx_[0] << " " << _vy_[0] << " " << _r_[0] << endl;
     
     //para n=1000
     t[0] = 0.0;
@@ -291,7 +291,7 @@ double runge_kutta()
         
         _r_[i] = sqrt(pow(_x_[i],2) + pow(_y_[i],2));
         
-        archivo2 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i]  << endl;
+        archivo2 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
     }
     archivo2.close();
     
@@ -350,7 +350,7 @@ double runge_kutta()
         
         _r_[i] = sqrt(pow(_x_[i],2) + pow(_y_[i],2));
         
-        archivo2_dt2 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i]  << endl;
+        archivo2_dt2 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
     }
     archivo2_dt2.close();
     
@@ -409,7 +409,7 @@ double runge_kutta()
         
         _r_[i] = sqrt(pow(_x_[i],2) + pow(_y_[i],2));
         
-        archivo2_dt3 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i]  << endl;
+        archivo2_dt3 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
     }
     archivo2_dt3.close();
 } 
