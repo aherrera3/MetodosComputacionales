@@ -45,53 +45,53 @@ _y3_ = runge_kutta_dt3[:,2]
 plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(x1, y1)
-plt.title("euler dt=0.02")
+plt.title("euler dt=0.01")
 plt.ylabel("y")
 plt.grid()
 
 plt.subplot(3,3,2)
 plt.plot(x2, y2)
-plt.title("euler dt=0.002")
+plt.title("euler dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,3)
 plt.plot(x3, y3)
-plt.title("euler dt=0.0002")
+plt.title("euler dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,4)
 plt.plot(x1_, y1_)
-plt.title("leap-frog dt=0.02")
+plt.title("leap-frog dt=0.01")
 plt.ylabel("y")
 plt.grid()
 
 plt.subplot(3,3,5)
 plt.plot(x2_, y2_)
-plt.title("leap-frog dt=0.002")
+plt.title("leap-frog dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,6)
 plt.plot(x3_, y3_)
-plt.title("leap-frog dt=0.0002")
+plt.title("leap-frog dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,7)
 plt.plot(_x1_, _y1_)
-plt.title("runge-kutta dt=0.02")
-plt.ylabel("y")
-plt.xlabel("x")
+plt.title("runge-kutta dt=0.01")
+plt.ylabel("y [UA]")
+plt.xlabel("x [UA]")
 plt.grid()
 
 plt.subplot(3,3,8)
 plt.plot(_x2_, _y2_)
-plt.title("runge-kutta dt=0.002")
-plt.xlabel("x")
+plt.title("runge-kutta dt=0.001")
+plt.xlabel("x [UA]")
 plt.grid()
 
 plt.subplot(3,3,9)
 plt.plot(_x3_, _y3_)
-plt.title("runge-kutta dt=0.0002")
-plt.xlabel("x")
+plt.title("runge-kutta dt=0.0001")
+plt.xlabel("x [UA]")
 plt.grid()
 
 plt.subplots_adjust(hspace = 0.5)
@@ -100,6 +100,8 @@ plt.savefig("y_vs_x.png")
 
 
 #GRAFICA DE Vy vs Vx
+
+# vx y vy para euler
 vx1 = euler_dt1[:,3]
 vx2 = euler_dt2[:,3]
 vx3 = euler_dt3[:,3]
@@ -108,6 +110,7 @@ vy1 = euler_dt1[:,4]
 vy2 = euler_dt2[:,4]
 vy3 = euler_dt3[:,4]
 
+# vs y vy  para leap-frog
 vx1_ = leap_frog_dt1[:,3]
 vx2_ = leap_frog_dt2[:,3]
 vx3_ = leap_frog_dt3[:,3]
@@ -116,6 +119,7 @@ vy1_ = leap_frog_dt1[:,4]
 vy2_ = leap_frog_dt2[:,4]
 vy3_ = leap_frog_dt3[:,4]
 
+# vs y vy para runge-kutta
 _vx1_ = runge_kutta_dt1[:,3]
 _vx2_ = runge_kutta_dt2[:,3]
 _vx3_ = runge_kutta_dt3[:,3]
@@ -127,53 +131,53 @@ _vy3_ = runge_kutta_dt3[:,4]
 plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(vx1, vy1)
-plt.title("euler dt=0.02")
-plt.ylabel("vy")
+plt.title("euler dt=0.01")
+plt.ylabel("vy [UA/años]")
 plt.grid()
 
 plt.subplot(3,3,2)
 plt.plot(vx2, vy2)
-plt.title("euler dt=0.002")
+plt.title("euler dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,3)
 plt.plot(vx3, vy3)
-plt.title("euler dt=0.0002")
+plt.title("euler dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,4)
 plt.plot(vx1_, vy1_)
-plt.title("leap-frog dt=0.02")
-plt.ylabel("vy")
+plt.title("leap-frog dt=0.01")
+plt.ylabel("vy [UA/años]")
 plt.grid()
 
 plt.subplot(3,3,5)
 plt.plot(vx2_, vy2_)
-plt.title("leap-frog dt=0.002")
+plt.title("leap-frog dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,6)
 plt.plot(vx3_, vy3_)
-plt.title("leap-frog dt=0.0002")
+plt.title("leap-frog dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,7)
 plt.plot(_vx1_, _vy1_)
-plt.title("runge-kutta dt=0.02")
-plt.ylabel("vy")
-plt.xlabel("vx")
+plt.title("runge-kutta dt=0.01")
+plt.ylabel("vy [UA/años]")
+plt.xlabel("vx [UA/años]")
 plt.grid()
 
 plt.subplot(3,3,8)
 plt.plot(_vx2_, _vy2_)
-plt.title("runge-kutta dt=0.002")
-plt.xlabel("vx")
+plt.title("runge-kutta dt=0.001")
+plt.xlabel("vx [UA/años]")
 plt.grid()
 
 plt.subplot(3,3,9)
 plt.plot(_vx3_, _vy3_)
-plt.title("runge-kutta dt=0.0002")
-plt.xlabel("vx")
+plt.title("runge-kutta dt=0.0001")
+plt.xlabel("vx [UA/años]")
 plt.grid()
 
 plt.subplots_adjust(hspace = 0.5)
@@ -211,24 +215,24 @@ _r1_ = runge_kutta_dt1[:,5]
 _r2_ = runge_kutta_dt2[:,5]
 _r3_ = runge_kutta_dt3[:,5]
 
-#magnitud de la velocidad para euler
+# magnitud de la velocidad para euler
 v1 = np.sqrt(vx1**2 + vy1**2)
 v2 = np.sqrt(vx2**2 + vy2**2)
 v3 = np.sqrt(vx3**2 + vy3**2)
-#magnitud de la velocidad para leap-frog
+# magnitud de la velocidad para leap-frog
 v1_ = np.sqrt(vx1_**2 + vy1_**2)
 v2_ = np.sqrt(vx2_**2 + vy2_**2)
 v3_ = np.sqrt(vx3_**2 + vy3_**2)
-#magnitud de la velocidad para runge-kutta
+# magnitud de la velocidad para runge-kutta
 _v1_ = np.sqrt(_vx1_**2 + _vy1_**2)
 _v2_ = np.sqrt(_vx2_**2 + _vy2_**2)
 _v3_ = np.sqrt(_vx3_**2 + _vy3_**2)
 
-#momentos angulares de euler
+# momentos angulares de euler
 L1 = r1*m*v1
 L2 = r2*m*v2
 L3 = r3*m*v3
-#momentos angulares de leap-frog
+# momentos angulares de leap-frog
 L1_ = r1_*m*v1_
 L2_ = r2_*m*v2_
 L3_ = r3_*m*v3_
@@ -241,52 +245,52 @@ _L3_ = _r3_*m*_v3_
 plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(t1, L1)
-plt.title("euler dt=0.02")
-plt.ylabel("L")
+plt.title("euler dt=0.01")
+plt.ylabel("L [m_sol UA^2 / años]")
 plt.grid()
 
 plt.subplot(3,3,2)
 plt.plot(t2, L2)
-plt.title("euler dt=0.002")
+plt.title("euler dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,3)
 plt.plot(t3, L3)
-plt.title("euler dt=0.0002")
+plt.title("euler dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,4)
 plt.plot(t1_, L1_)
-plt.title("leap-frog dt=0.02")
-plt.ylabel("L")
+plt.title("leap-frog dt=0.01")
+plt.ylabel("L [m_sol*UA^2 / años]")
 plt.grid()
 
 plt.subplot(3,3,5)
 plt.plot(t2_, L2_)
-plt.title("leap-frog dt=0.002")
+plt.title("leap-frog dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,6)
 plt.plot(t3_, L3_)
-plt.title("leap-frog dt=0.0002")
+plt.title("leap-frog dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,7)
 plt.plot(_t1_, _L1_)
-plt.title("runge-kutta dt=0.02 \n")
-plt.ylabel("L")
+plt.title("runge-kutta dt=0.01 \n")
+plt.ylabel("L [m_sol*UA^2 / años]")
 plt.xlabel("t (años)")
 plt.grid()
 
 plt.subplot(3,3,8)
 plt.plot(_t2_, _L2_)
-plt.title("runge-kutta dt=0.002 \n")
+plt.title("runge-kutta dt=0.001 \n")
 plt.xlabel("t (años)")
 plt.grid()
 
 plt.subplot(3,3,9)
 plt.plot(_t3_, _L3_)
-plt.title("runge-kutta dt=0.0002 \n")
+plt.title("runge-kutta dt=0.0001 \n")
 plt.xlabel("t (años)")
 plt.grid()
 
@@ -319,52 +323,52 @@ _E3_ = (1/2)*m*_v3_**2 - G*m/_r3_
 plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(t1, E1)
-plt.title("euler dt=0.02")
-plt.ylabel("E")
+plt.title("euler dt=0.01")
+plt.ylabel("E [m_sol*UA^2 / años^2]")
 plt.grid()
 
 plt.subplot(3,3,2)
 plt.plot(t2, E2)
-plt.title("euler dt=0.002")
+plt.title("euler dt=0.001")
 plt.grid()
 
 plt.subplot(3,3,3)
 plt.plot(t3, E3)
-plt.title("euler dt=0.0002")
+plt.title("euler dt=0.0001")
 plt.grid()
 
 plt.subplot(3,3,4)
 plt.plot(t1_, E1_)
-plt.title("leap-frog dt=0.02 \n")
-plt.ylabel("E")
+plt.title("leap-frog dt=0.01 \n")
+plt.ylabel("E [m_sol*UA^2 / años^2]")
 plt.grid()
 
 plt.subplot(3,3,5)
 plt.plot(t2_, E2_)
-plt.title("leap-frog dt=0.002 \n")
+plt.title("leap-frog dt=0.001 \n")
 plt.grid()
 
 plt.subplot(3,3,6)
 plt.plot(t3_, E3_)
-plt.title("leap-frog dt=0.0002 \n")
+plt.title("leap-frog dt=0.0001 \n")
 plt.grid()
 
 plt.subplot(3,3,7)
 plt.plot(_t1_, _E1_)
-plt.title("runge-kutta dt=0.02 \n")
-plt.ylabel("E")
+plt.title("runge-kutta dt=0.01 \n")
+plt.ylabel("E [m_sol*UA^2 / años^2]")
 plt.xlabel("t (años)")
 plt.grid()
 
 plt.subplot(3,3,8)
 plt.plot(_t2_, _E2_)
-plt.title("runge-kutta dt=0.002 \n")
+plt.title("runge-kutta dt=0.001 \n")
 plt.xlabel("t (años)")
 plt.grid()
 
 plt.subplot(3,3,9)
 plt.plot(_t3_, _E3_)
-plt.title("runge-kutta dt=0.0002 \n")
+plt.title("runge-kutta dt=0.0001 \n")
 plt.xlabel("t (años)")
 plt.grid()
 

@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pylab as plt
-from scipy.fftpack import fft2, ifft2, fftshift
+from scipy.fftpack import fft2, ifft2, fftshift, ifftshift
 
 #Almaceno los datos las dos imágenes
 im1 = plt.imread("cara_02_grisesMF.png")   #imagen sorprendida
@@ -43,8 +43,6 @@ plt.savefig("freq_im2.png")
 fc_1 = 1
 ind_im1 = np.where(abs(freq_im1) < fc_1)   #indices de mis frecuencias malas
 freq_im1[ind_im1] = 0   #mando a 0 las frecuencias malas
-trans_im1 = np.copy(fourier_im1)
-trans_im1[ind_im1] = 0
 
 plt.figure()
 plt.imshow(abs(freq_im1), norm=LogNorm())
@@ -53,12 +51,9 @@ plt.title("Espectro de filtrado im1")
 plt.savefig("filtro_im1.png")
 
 #filtro paso bajo para imagen de lejos
-fc_2 = 10
+fc_2 = 30
 ind_im2 = np.where(abs(freq_im2) > fc_2)
 freq_im2[ind_im2] = 0
-trans_im2 = np.copy(fourier_im2)
-trans_im2[ind_im2] = 0
-
 
 plt.figure()
 plt.imshow(abs(freq_im2), norm=LogNorm())
@@ -66,25 +61,18 @@ plt.colorbar()
 plt.title("Espectro de filtrado im2")
 plt.savefig("filtro_im2.png")
 
-#Graficas de imagenes filtradas
-im1_fil = ifft2(trans_im1)
-plt.figure()
-plt.imshow(np.real(im1_fil), plt.cm.gray)
-plt.title("im1 filtrada")
-plt.savefig("im1_filtrada.png")
+#Saco espectros de Fourier correspondientes a las frecuencias filtradas
+trans_im1 = ifftshift(freq_im1) 
+trans_im2 = ifftshift(freq_im2)
 
-im2_fil = ifft2(trans_im2)
-plt.figure()
-plt.imshow(np.real(im2_fil), plt.cm.gray)
-plt.title("im2 filtrada")
-plt.savefig("im2_filtrada.png")
+#Suma de espectros correspondientes a frecuencias filtradas
+trans = trans_im1 + trans_im2
 
 #Grafica de ambas juntas (imagen hibrida)
+im_hibrida = ifft2(trans)
 
-im_hibrida = np.real(im1_fil) + np.real(im2_fil)
 plt.figure()
-plt.imshow(im_hibrida, plt.cm.gray)
-plt.title('imagen hibrida')
+plt.imshow(abs(im_hibrida), plt.cm.gray)
+plt.title('Imagen hibrida')
 plt.savefig("im_hibrida.png")
-
 

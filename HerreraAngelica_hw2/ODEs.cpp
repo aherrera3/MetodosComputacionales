@@ -1,4 +1,4 @@
-// x'' = -G m r / r**3
+// x'' = -G m pos / r**3
 
 #include <iostream>
 #include <fstream>
@@ -6,9 +6,9 @@
 using namespace std; 
 
 //variables globales
-double G, m_s, m, dt, r[100000], t[1000], x[100000], y[100000], vx[100000], vy[100000]; 
-double t_[10000], r_[100000], x_[100000], y_[100000], vx_[100000], vy_[100000];   //leap-frog
-double _t_[100000], _r_[100000], _x_[100000], _y_[100000], _vx_[100000], _vy_[100000];    //runge-kutta
+double G, m_s, m, dt, t[2000], r[200000], x[200000], y[200000], vx[200000], vy[200000]; 
+double t_[20000], r_[200000], x_[200000], y_[200000], vx_[200000], vy_[200000];   //leap-frog
+double _t_[200000], _r_[200000], _x_[200000], _y_[200000], _vx_[200000], _vy_[200000];    //runge-kutta
 int n, n1, n2;
 
 //Declaracion de las funciones
@@ -19,27 +19,29 @@ double aceleracion(double, double);
 
 int main()
 {
-    //creo archivos para euler y lep-frog
+    //Creo archivos para euler
     ofstream archivo;
     archivo.open("euler_dt1.dat");
-    ofstream archivo1;
-    archivo1.open("leap_frog_dt1.dat");
     ofstream archivo_dt2;
     archivo_dt2.open("euler_dt2.dat");
-    ofstream archivo1_dt2;
-    archivo1_dt2.open("leap_frog_dt2.dat");
     ofstream archivo_dt3;
     archivo_dt3.open("euler_dt3.dat");
+    
+    //Creo archivos para leap-frog
+    ofstream archivo1;
+    archivo1.open("leap_frog_dt1.dat");
+    ofstream archivo1_dt2;
+    archivo1_dt2.open("leap_frog_dt2.dat");
     ofstream archivo1_dt3;
     archivo1_dt3.open("leap_frog_dt3.dat");
     
     m_s = 1.989e30;
-    G = 1.98256e-29*m_s;    //6.674*pow(10,-11);   //constante gravitacional  [N m^2/kg^2]
+    G = 1.98256e-29*m_s;    //  [UA^3 / masa_solar*años^2]          6.674*pow(10,-11); constante gravitacional  [N m^2/kg^2]
     m = 1;
     
-    n = 1000;
-    n1 = 10000;
-    n2 = 100000;
+    n = 2000;
+    n1 = 20000;
+    n2 = 200000;
     
     //c.i
     x[0] = 0.1163;  //para euler
@@ -61,6 +63,13 @@ int main()
     r_[0] = r[0];                                   //para leap-frog  
     _r_[0] = r[0];                                 //para runge-kutta
     
+    
+    //para n=1000 (dt=0.01)
+    t[0] = 0.0;
+    //t[n-1] = 20.0;          //20 orbitas = 20 años
+    dt = (20-t[0])/(n-1); 
+    cout << "mi dt_1 es :" << dt << endl;
+    
     //paso condiciones iniciales a archivos 
     archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << " " << r[0]  << endl;
     archivo_dt2 << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << " " << r[0] << endl;
@@ -69,14 +78,8 @@ int main()
     archivo1 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << " " << r_[0] << endl;
     archivo1_dt2 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << " " << r_[0] << endl;
     archivo1_dt3 << t[0] << " " << x_[0] << " " << y_[0] << " " << vx_[0] << " " << vy_[0] << " " << r_[0] << endl;
-    
-    
-    //para n=1000 (dt=0.02)
-    t[0] = 0.0;
-    t[n-1] = 20.0;          //20 orbitas = 20 años
-    dt = (t[n-1]-t[0])/(n-1); 
-    cout << "mi dt_1 es :" << dt << endl;
-    
+
+       
     for(int i=1; i<n; i++)
     {
         t[i] = t[i-1] + dt;
@@ -116,10 +119,10 @@ int main()
     archivo1.close();
     
     
-    //para n=10000 (dt=0.002)
+    //para n=10000 (dt=0.001)
     t_[0] = 0.0;
-    t_[n1-1] = 20.0;          //20 orbitas = 20 años
-    dt = (t_[n1-1]-t_[0])/(n1-1); 
+    //t_[n1-1] = 20.0;          //20 orbitas = 20 años
+    dt = (20-t_[0])/(n1-1); 
     cout << "mi dt_2 es :" << dt << endl;
     
     for(int i=1; i<n1; i++)
@@ -160,10 +163,10 @@ int main()
     archivo1_dt2.close();
     
     
-    //para n=100000 (dt=0.0002)
+    //para n=100000 (dt=0.0001)
     _t_[0] = 0.0;
-    _t_[n2-1] = 20.0;          //20 orbitas = 20 años
-    dt = (_t_[n2-1]-_t_[0])/(n2-1); 
+    //_t_[n2-1] = 20.0;          //20 orbitas = 20 años
+    dt = (20-_t_[0])/(n2-1); 
     cout << "mi dt_3 es :" << dt << endl;
     
     for(int i=1; i<n2; i++)
@@ -239,11 +242,13 @@ double runge_kutta()
     
     //para n=1000
     t[0] = 0.0;
-    t[n-1] = 20.0;          //20 orbitas = 20 años
-    dt = (t[n-1]-t[0])/(n-1); 
+    //t[n-1] = 20.0;          //20 orbitas = 20 años
+    dt = (20-t[0])/(n-1); 
     
     for(int i=1; i<n; i++)
     {
+        t[i] = t[i-1] + dt;
+        
         double k1_1_x = _vx_[i-1];
         double k1_2_x = aceleracion(_x_[i-1], _r_[i-1]);
         double k1_1_y = _vy_[i-1];
@@ -298,11 +303,13 @@ double runge_kutta()
     
     //para n=10000
     t_[0] = 0.0;
-    t_[n1-1] = 20.0;          //20 orbitas = 20 años
-    dt = (t_[n1-1]-t_[0])/(n1-1); 
+    //t_[n1-1] = 20.0;          //20 orbitas = 20 años
+    dt = (20-t_[0])/(n1-1); 
     
     for(int i=1; i<n1; i++)
     {
+        t_[i] = t_[i-1] + dt;
+        
         double k1_1_x = _vx_[i-1];
         double k1_2_x = aceleracion(_x_[i-1], _r_[i-1]);
         double k1_1_y = _vy_[i-1];
@@ -350,18 +357,20 @@ double runge_kutta()
         
         _r_[i] = sqrt(pow(_x_[i],2) + pow(_y_[i],2));
         
-        archivo2_dt2 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
+        archivo2_dt2 << t_[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
     }
     archivo2_dt2.close();
     
     
     //para n=100000
     _t_[0] = 0.0;
-    _t_[n2-1] = 20.0;          //20 orbitas = 20 años
-    dt = (_t_[n2-1]-_t_[0])/(n2-1); 
+    //_t_[n2-1] = 20.0;          //20 orbitas = 20 años
+    dt = (20-_t_[0])/(n2-1); 
     
     for(int i=1; i<n2; i++)
     {
+        _t_[i] = _t_[i-1] + dt;
+        
         double k1_1_x = _vx_[i-1];
         double k1_2_x = aceleracion(_x_[i-1], _r_[i-1]);
         double k1_1_y = _vy_[i-1];
@@ -409,7 +418,7 @@ double runge_kutta()
         
         _r_[i] = sqrt(pow(_x_[i],2) + pow(_y_[i],2));
         
-        archivo2_dt3 << t[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
+        archivo2_dt3 << _t_[i] << " " << _x_[i] << " " << _y_[i] << " " << _vx_[i] << " " << _vy_[i] << " " << _r_[i] << endl;
     }
     archivo2_dt3.close();
 } 
