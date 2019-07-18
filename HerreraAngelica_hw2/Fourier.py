@@ -3,8 +3,8 @@ import matplotlib.pylab as plt
 from scipy.fftpack import fft2, ifft2, fftshift, ifftshift
 
 #Almaceno los datos las dos imágenes
-im1 = plt.imread("cara_02_grisesMF.png")   #imagen sorprendida
-im2 = plt.imread("cara_03_grisesMF.png")   #imagen feliz
+im1 = plt.imread("cara_03_grisesMF.png")   #imagen sorprendida
+im2 = plt.imread("cara_02_grisesMF.png")   #imagen feliz
 
 #Transformada de Fourier en 2D de ambas imágenes
 fourier_im1 = fft2(im1)
@@ -40,7 +40,7 @@ plt.savefig("freq_im2.png")
 
 #Filtros y sus graficas
 #filtro paso alto para imagen de cerca
-fc_1 = 10
+fc_1 = 40
 ind_im1 = np.where(abs(freq_im1) < fc_1)   #indices de mis frecuencias malas
 freq_im1[ind_im1] = 0   #mando a 0 las frecuencias malas
 
@@ -51,7 +51,7 @@ plt.title("Espectro de filtrado im1")
 plt.savefig("filtro_im1.png")
 
 #filtro paso bajo para imagen de lejos
-fc_2 = 20
+fc_2 = 30
 ind_im2 = np.where(abs(freq_im2) > fc_2)
 freq_im2[ind_im2] = 0
 
@@ -66,7 +66,7 @@ trans_im1 = ifftshift(freq_im1)
 trans_im2 = ifftshift(freq_im2)
 
 #Suma de espectros correspondientes a frecuencias filtradas
-trans = trans_im1 + trans_im2
+trans = trans_im1*0.3 + trans_im2
 
 #Grafica de ambas juntas (imagen hibrida)
 im_hibrida = ifft2(trans)
