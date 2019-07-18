@@ -96,7 +96,7 @@ plt.grid()
 
 plt.subplots_adjust(hspace = 0.5)
 plt.suptitle("y vs x para 20 orbitas de la Tierra")
-plt.savefig("y_vs_x")
+plt.savefig("y_vs_x.png")
 
 
 #GRAFICA DE Vy vs Vx
@@ -178,7 +178,7 @@ plt.grid()
 
 plt.subplots_adjust(hspace = 0.5)
 plt.suptitle("vy vs vx para 20 orbitas de la Tierra")
-plt.savefig("vy_vs_vx")
+plt.savefig("vy_vs_vx.png")
 
 
 
@@ -292,7 +292,7 @@ plt.grid()
 
 plt.subplots_adjust(hspace = 0.7, wspace=0.7)
 plt.suptitle("L vs t para 20 orbitas de la Tierra")
-plt.savefig("L_vs_t")
+plt.savefig("L_vs_t.png")
 
 
 
@@ -370,4 +370,4 @@ plt.grid()
 
 plt.subplots_adjust(hspace = 0.7, wspace=0.7)
 plt.suptitle("E vs t para 20 orbitas de la Tierra")
-plt.savefig("E_vs_t")
+plt.savefig("E_vs_t.png")
