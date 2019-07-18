@@ -42,7 +42,7 @@ _y2_ = runge_kutta_dt2[:,2]
 _y3_ = runge_kutta_dt3[:,2]
 
 
-plt.figure(figsize=(10,7))
+plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(x1, y1)
 plt.title("euler dt=0.02")
@@ -124,7 +124,7 @@ _vy1_ = runge_kutta_dt1[:,4]
 _vy2_ = runge_kutta_dt2[:,4]
 _vy3_ = runge_kutta_dt3[:,4]
 
-plt.figure(figsize=(10,7))
+plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(vx1, vy1)
 plt.title("euler dt=0.02")
@@ -183,9 +183,9 @@ plt.savefig("vy_vs_vx")
 
 
 #CALCULO DEL MOMENTO ANGULAR DE LA TIERRA  (L = r x p = r x mv = rmv sen(90))
-#Se suponen tierra y sol como masas puntuales, y orbita de la tierra circular
+#el momento angular se debe mantener aprox constante
 m_s = 1.989e30      #masa del sol
-m = 5.972e24#/m_s    #masa de la tierra [kg]
+m = 5.972e24/m_s    #masa de la tierra [kg]
 
 #tiempos
 t1 = euler_dt1[:,0]
@@ -238,7 +238,7 @@ _L2_ = _r2_*m*_v2_
 _L3_ = _r3_*m*_v3_
 
 #GRAFICA DE LOS MOMENTOS ANGULARES
-plt.figure(figsize=(10,7))
+plt.figure(figsize=(10,10))
 plt.subplot(3,3,1)
 plt.plot(t1, L1)
 plt.title("euler dt=0.02")
@@ -273,30 +273,101 @@ plt.grid()
 
 plt.subplot(3,3,7)
 plt.plot(_t1_, _L1_)
-plt.title("runge-kutta dt=0.02")
+plt.title("runge-kutta dt=0.02 \n")
 plt.ylabel("L")
 plt.xlabel("t (años)")
 plt.grid()
 
 plt.subplot(3,3,8)
 plt.plot(_t2_, _L2_)
-plt.title("runge-kutta dt=0.002")
+plt.title("runge-kutta dt=0.002 \n")
 plt.xlabel("t (años)")
 plt.grid()
 
 plt.subplot(3,3,9)
 plt.plot(_t3_, _L3_)
-plt.title("runge-kutta dt=0.0002")
+plt.title("runge-kutta dt=0.0002 \n")
 plt.xlabel("t (años)")
 plt.grid()
 
-plt.subplots_adjust(hspace = 0.5, wspace=0.3)
+plt.subplots_adjust(hspace = 0.7, wspace=0.7)
 plt.suptitle("L vs t para 20 orbitas de la Tierra")
 plt.savefig("L_vs_t")
 
 
 
+#CALCULO DE LAS ENERGIAS DEL SISTEMA
+G = 1.98256e-29*m_s
+
+#energias para euler
+E1 = (1/2)*m*v1**2 - G*m/r1
+E2 = (1/2)*m*v2**2 - G*m/r2
+E3 = (1/2)*m*v3**2 - G*m/r3
+
+#energias para leap-frog
+E1_ = (1/2)*m*v1_**2 - G*m/r1_
+E2_ = (1/2)*m*v2_**2 - G*m/r2_
+E3_ = (1/2)*m*v3_**2 - G*m/r3_
+
+#energias para runge-kutta
+_E1_ = (1/2)*m*_v1_**2 - G*m/_r1_
+_E2_ = (1/2)*m*_v2_**2 - G*m/_r2_
+_E3_ = (1/2)*m*_v3_**2 - G*m/_r3_
 
 
+#GRAFICA DE LAS ENERGIAS
+plt.figure(figsize=(10,10))
+plt.subplot(3,3,1)
+plt.plot(t1, E1)
+plt.title("euler dt=0.02")
+plt.ylabel("E")
+plt.grid()
 
+plt.subplot(3,3,2)
+plt.plot(t2, E2)
+plt.title("euler dt=0.002")
+plt.grid()
 
+plt.subplot(3,3,3)
+plt.plot(t3, E3)
+plt.title("euler dt=0.0002")
+plt.grid()
+
+plt.subplot(3,3,4)
+plt.plot(t1_, E1_)
+plt.title("leap-frog dt=0.02 \n")
+plt.ylabel("E")
+plt.grid()
+
+plt.subplot(3,3,5)
+plt.plot(t2_, E2_)
+plt.title("leap-frog dt=0.002 \n")
+plt.grid()
+
+plt.subplot(3,3,6)
+plt.plot(t3_, E3_)
+plt.title("leap-frog dt=0.0002 \n")
+plt.grid()
+
+plt.subplot(3,3,7)
+plt.plot(_t1_, _E1_)
+plt.title("runge-kutta dt=0.02 \n")
+plt.ylabel("E")
+plt.xlabel("t (años)")
+plt.grid()
+
+plt.subplot(3,3,8)
+plt.plot(_t2_, _E2_)
+plt.title("runge-kutta dt=0.002 \n")
+plt.xlabel("t (años)")
+plt.grid()
+
+plt.subplot(3,3,9)
+plt.plot(_t3_, _E3_)
+plt.title("runge-kutta dt=0.0002 \n")
+plt.xlabel("t (años)")
+plt.grid()
+
+plt.subplots_adjust(hspace = 0.7, wspace=0.7)
+plt.suptitle("E vs t para 20 orbitas de la Tierra")
+plt.savefig("E_vs_t")
