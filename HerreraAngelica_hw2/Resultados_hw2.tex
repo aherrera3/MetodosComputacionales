@@ -1,0 +1,92 @@
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{lineno}
+\usepackage{float}
+\usepackage{pdfpages}   %para agregar pdf
+
+\begin{document}
+\begin{frontmatter}
+\title{Resultados de: imagen híbrida y movimiento planetario.}
+
+\author{Angélica Herrera Alba}
+\address{Métodos computacionales}
+\address{Universidad de Los Andes}
+\date{19 de Julio 2019}
+
+\begin{abstract}
+En el presente documento se exponen los procesos y resultados obtenidos al realizar una imagen híbrida, haciendo uso de la transformada de Fourier, y de dos filtros para las frecuencias: un filtro pasa bajo y otro pasa alto.\\
+
+Además, se analizó el movimiento, la velocidad, la energía y el momento angular de la Tierra alrededor del Sol, por medio de los métodos de integración de Euler, Leap-Frog y Runge-Kutta de cuarto orden. 
+\end{abstract}
+\end{frontmatter}
+
+\section{Imagen híbrida}
+Para crear la imagen híbrida de la figura \ref{hibrida}, se partió por realizar las transformadas de Fourier de ambas imágenes, cuyos espectros se ven en la figura \ref{espectro_fourier}. Seguidamente, se sacaron las frecuencias de estos espectros y se filtraron estas con un filtro pasa bajo para la imagen que se verá de cerca (imagen seria), con frecuencia de corte de 30 Hz, y un filtro pasa alto para la imagen de lejos (imagen sonriendo), con frecuencia de corte de 40 Hz. Los espectros de las frecuencias no filtradas y filtradas se encuentran en la figura \ref{espectro_frecuencias}. Finalmente, se sacaron los espectros de Fourier correspondientes a las frecuencias filtradas, se sumaron ambos espectros, y con la transformada inversa de Fourier del espectro de esta suma, se halló la imagen híbrida que se muestra en la figura \ref{hibrida}. 
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{originales.pdf}
+\caption{Imágenes originales.}
+\label{originales.pdf}
+\end{figure*}
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{FFtIm.pdf}
+\caption{Espectros de Fourier de ambas imágenes.}
+\label{espectro_fourier}
+\end{figure*}
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{ImProceso.pdf}
+\caption{Espectros de las frecuencias y de sus filtros.}
+\label{espectro_frecuencias}
+\end{figure*}
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{ImHybrid.pdf}
+\caption{Imagen híbrida.}
+\label{hibrida}
+\end{figure*}
+
+
+\section{Modelando órbita terrestre.}
+Se resolvió la ecuación diferencial para el movimiento de la Tierra alrededor del sol, la cual es 
+$$ (\ddot{x}, \ddot{y}) = \frac{-G \; m_{sol} \; (x, y)}{r^3} ,$$ 
+en donde $r$ es la distancia entre el Sol y la Tierra, y $G$ es la constante de gravitación universal. Se tomó todo en unidades astronómicas (UA), en años y en masas solares. Esta ecuación diferencial se resolvió con los métodos de Euler, Leap-Frog y Runge-Kutta, para diferente numero de puntos. Se evidenció que el mejor método que modela el comportamiento de la Tierra alrededor del Sol es el de Runge-Kutta, seguido por el de Leap-Frog y por último el Euler, tal como se esperaba. La gráfica del movimiento de la Tierra en el plano xy se encuentra en la figura \ref{posicion}. Se evidenció además, que a mayor número de puntos (menor dt), se modela mejor la órbita terrestre. Gráfica de la componente de la velocidad tangencial en y contra la de la velocidad tangencial en x se encuentra en la figura \ref{velocidad}. Para finalizar, tanto el momento angular como la energía se espera conservar, lo que mejor ocurre para el método de Runge-Kutta y para un mayor dt, tal como lo evidencian las figuras \ref{momento_angular} y \ref{energia}.
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1 \textwidth]{XY_met_dt.pdf}
+\caption{Posiciones de la tierra durante 20 órbitas por medio de los métodos de integración de Euler, Leap-frog y Runge-Kutta, y para 3 dt diferentes.}
+\label{posicion}
+\end{figure*}
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{VxVy_met_dt.pdf}
+\caption{Componente de la velocidad en y contra la componente de la velocidad en x, para los 3 métodos de integración usados y para 3 dt diferentes.}
+\label{velocidad}
+\end{figure*}
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{Mome_met_dt.pdf}
+\caption{Momentos angulares de la Tierra para 20 órbitas alrededor del Sol, para los 3 métodos y 3 dt usados.}
+\label{momento_angular}
+\end{figure*}
+
+\begin{figure*}[h!] 
+\centering
+\includegraphics[width=1\textwidth]{Ener_met_dt.pdf}
+\caption{Energía del sistema Tierra-Sol para 20 órbitas de la Tierra, por los 3 métodos de integración usados y 3 dt distintos.}
+\label{energia}
+\end{figure*}
+
+\end{document}

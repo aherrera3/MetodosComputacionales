@@ -36,7 +36,7 @@ int main()
     archivo1_dt3.open("leap_frog_dt3.dat");
     
     m_s = 1.989e30;
-    G = 1.98256e-29*m_s;    //  [UA^3 / masa_solar*años^2]          6.674*pow(10,-11); constante gravitacional  [N m^2/kg^2]
+    G = 1.98256e-29*m_s;    //  [UA^3 / masa_solar*años^2]
     m = 1;
     
     n = 2000;
@@ -66,9 +66,8 @@ int main()
     
     //para n=1000 (dt=0.01)
     t[0] = 0.0;
-    //t[n-1] = 20.0;          //20 orbitas = 20 años
-    dt = (20-t[0])/(n-1); 
-    cout << "mi dt_1 es :" << dt << endl;
+    t[n-1] = 20.0;          //20 orbitas = 20 años
+    dt = (t[n-1]-t[0])/(n-1); 
     
     //paso condiciones iniciales a archivos 
     archivo << t[0] << " " << x[0] << " " << y[0] << " " << vx[0] << " " << vy[0] << " " << r[0]  << endl;
@@ -121,9 +120,8 @@ int main()
     
     //para n=10000 (dt=0.001)
     t_[0] = 0.0;
-    //t_[n1-1] = 20.0;          //20 orbitas = 20 años
-    dt = (20-t_[0])/(n1-1); 
-    cout << "mi dt_2 es :" << dt << endl;
+    t_[n1-1] = 20.0;          
+    dt = (t_[n1-1]-t_[0])/(n1-1); 
     
     for(int i=1; i<n1; i++)
     {
@@ -165,9 +163,8 @@ int main()
     
     //para n=100000 (dt=0.0001)
     _t_[0] = 0.0;
-    //_t_[n2-1] = 20.0;          //20 orbitas = 20 años
-    dt = (20-_t_[0])/(n2-1); 
-    cout << "mi dt_3 es :" << dt << endl;
+    _t_[n2-1] = 20.0;        
+    dt = (_t_[n2-1]-_t_[0])/(n2-1); 
     
     for(int i=1; i<n2; i++)
     {
@@ -242,8 +239,8 @@ double runge_kutta()
     
     //para n=1000
     t[0] = 0.0;
-    //t[n-1] = 20.0;          //20 orbitas = 20 años
-    dt = (20-t[0])/(n-1); 
+    t[n-1] = 20.0;         
+    dt = (t[n-1]-t[0])/(n-1); 
     
     for(int i=1; i<n; i++)
     {
@@ -303,8 +300,8 @@ double runge_kutta()
     
     //para n=10000
     t_[0] = 0.0;
-    //t_[n1-1] = 20.0;          //20 orbitas = 20 años
-    dt = (20-t_[0])/(n1-1); 
+    t_[n1-1] = 20.0;         
+    dt = (t_[n1-1]-t_[0])/(n1-1); 
     
     for(int i=1; i<n1; i++)
     {
@@ -364,8 +361,8 @@ double runge_kutta()
     
     //para n=100000
     _t_[0] = 0.0;
-    //_t_[n2-1] = 20.0;          //20 orbitas = 20 años
-    dt = (20-_t_[0])/(n2-1); 
+    _t_[n2-1] = 20.0;         
+    dt = (_t_[n2-1]-_t_[0])/(n2-1); 
     
     for(int i=1; i<n2; i++)
     {
